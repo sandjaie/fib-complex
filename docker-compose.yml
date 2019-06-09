@@ -1,9 +1,12 @@
 version: '3'
 services:
+
   postgres:
     image: 'postgres:11-alpine'
+
   redis:
     image: 'redis:5-alpine'
+
   nginx:
     restart: always
     build:
