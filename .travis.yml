@@ -14,7 +14,11 @@ after_success:
   - docker build -t sandjaie/fib-worker ./worker
   - docker build -t sandjaie/fib-nginx ./nginx
   - echo "$DOCKER_PASSWD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push sandjaie/fib-client
-  - docker push sandjaie/fib-server
-  - docker push sandjaie/fib-worker
-  - docker push sandjaie/fib-nginx
+  - docker push sandjaie/fib-client:$TRAVIS_JOB_ID
+  - docker tag sandjaie/fib-client:$TRAVIS_JOB_ID sandjaie/fib-client:latest
+  - docker push sandjaie/fib-server:$TRAVIS_JOB_ID
+  - docker tag sandjaie/fib-server:$TRAVIS_JOB_ID sandjaie/fib-server:latest
+  - docker push sandjaie/fib-worker:$TRAVIS_JOB_ID
+  - docker tag sandjaie/fib-worker:$TRAVIS_JOB_ID sandjaie/fib-worker:latest
+  - docker push sandjaie/fib-nginx:$TRAVIS_JOB_ID
+  - docker tag sandjaie/fib-nginx:$TRAVIS_JOB_ID sandjaie/fib-nginx:latest
